@@ -23,8 +23,31 @@ impl HttpServer for RealworldApiActor {
         let segments: Vec<&str> = path.trim_end_matches('/').split('/').collect();
         debug!("Segments: {:?}", segments);
         match (req.method.as_ref(), segments.as_slice()) {
-            ("GET", ["user"]) => Ok(HttpResponse::not_found()),
+            ("GET", ["user"]) => Ok(unexpected_error()),
+            ("PUT", ["user"]) => Ok(unexpected_error()),
+            ("GET", ["profiles", username]) => Ok(unexpected_error()),
+            ("POST", ["profiles", username, "follow"]) => Ok(unexpected_error()),
+            ("DELETE", ["profiles", username, "follow"]) => Ok(unexpected_error()),
+            ("GET", ["articles"]) => Ok(unexpected_error()),
+            ("GET", ["articles", "feed"]) => Ok(unexpected_error()),
+            ("GET", ["articles", slug]) => Ok(unexpected_error()),
+            ("POST", ["articles"]) => Ok(unexpected_error()),
+            ("PUT", ["articles", slug]) => Ok(unexpected_error()),
+            ("DELETE", ["articles", slug]) => Ok(unexpected_error()),
+            ("POST", ["articles", slug, "comments"]) => Ok(unexpected_error()),
+            ("GET", ["articles", slug, "comments"]) => Ok(unexpected_error()),
+            ("DELETE", ["articles", slug, "comments", id]) => Ok(unexpected_error()),
+            ("POST", ["articles", slug, "favorite"]) => Ok(unexpected_error()),
+            ("DELETE", ["articles", slug, "favorite"]) => Ok(unexpected_error()),
+            ("GET", ["tags"]) => Ok(unexpected_error()),
             (_, _) => Ok(HttpResponse::not_found()),
         }
+    }
+}
+
+fn unexpected_error() -> HttpResponse {
+    HttpResponse {
+        status_code: 422,
+        ..Default::default()
     }
 }
