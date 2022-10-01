@@ -9,7 +9,7 @@ use org.wasmcloud.examples.petclinic#Date
 @wasmbus( actorReceive: true )
 service Users {
   version: "0.1",
-  operations: [GetCurrentUser, UpdateCurrentUser]
+  operations: [GetCurrentUser, UpdateCurrentUser, LoginUser, RegisterUser]
 }
 
 structure GetCurrentUserInput {
