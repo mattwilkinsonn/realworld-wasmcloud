@@ -9,22 +9,67 @@ use org.wasmcloud.examples.petclinic#Date
 @wasmbus( actorReceive: true )
 service Users {
   version: "0.1",
-  operations: [GetUser]
+  operations: [GetCurrentUser, UpdateCurrentUser]
 }
 
-structure User {
+structure GetCurrentUserInput {
+    token: String
+}
+
+@mixin
+structure UserResponse {
     id: U64,
     username: String,
     email: String,
-    password: String,
     bio: String,
     image: String,
     createdAt: Date,
     updatedAt: Date
 }
 
-operation GetUser {
-    input: U64,
-    output: User
+operation GetCurrentUser {
+    input: GetCurrentUserInput,
+    output: UserResponse
+}
+
+structure UpdateCurrentUserRequest {
+    email: String,
+    username: String,
+    password: String,
+    image: String,
+    bio: String
+}
+
+operation UpdateCurrentUser {
+    input: UpdateCurrentUserRequest,
+    output: UserResponse
+}
+
+structure LoginUserRequest {
+    email: String,
+    password: String
+}
+
+structure LoginUserResponse with [UserResponse] {
+    token: String
+}
+
+operation LoginUser {
+    input: LoginUserRequest,
+    output: LoginUserResponse
+}
+
+structure NewUserRequest {
+    username: String,
+    password: String,
+    email: String,
+    bio: String,
+    image: String
+}
+
+
+operation RegisterUser {
+    input: NewUserRequest,
+    output: LoginUserResponse
 }
 
