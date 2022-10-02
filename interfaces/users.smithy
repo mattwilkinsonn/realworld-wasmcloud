@@ -73,3 +73,7 @@ operation RegisterUser {
     output: LoginUserResponse
 }
 
+@mixin
+structure UserInfo {
+    userId: U64,
+}
