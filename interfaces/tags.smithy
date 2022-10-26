@@ -8,13 +8,6 @@ use org.wasmcloud.examples.realworld#Profile
 use org.wasmcloud.examples.realworld#UserInfo
 use org.wasmcloud.examples.realworld#Article
 
-use org.wasmcloud.examples.petclinic#Date
-
-@mixin
-structure UserInfo {
-    userId: U64,
-}
-
 @wasmbus( actorReceive: true )
 service Tags {
   version: "0.1",

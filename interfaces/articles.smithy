@@ -6,8 +6,6 @@ use org.wasmcloud.model#u64
 
 use org.wasmcloud.examples.realworld#Profile
 
-use org.wasmcloud.examples.petclinic#Date
-
 @wasmbus( actorReceive: true )
 service Articles {
   version: "0.1",
@@ -15,7 +13,9 @@ service Articles {
 }
 
 structure GetFeedRequest with [UserInfo] {
+    @required
     limit: U64,
+    @required
     offset: U64
 }
 
@@ -25,23 +25,35 @@ structure MultipleArticlesResponse {
 }
 
 structure Article {
+    @required
     author: Profile,
+    @required
     body: String,
-    createdAt: Date,
+    @required
+    createdAt: Timestamp,
+    @required
     description: String,
+    @required
     favorited: Boolean,
+    @required
     favoritesCount: U64,
+    @required
     slug: String,
+    @required
     tagList: [String],
+    @required
     title: String,
-    updatedAt: Date
+    @required
+    updatedAt: Timestamp
 }
 
 structure GetArticlesRequest {
-    tag: String?,
-    author: String?,
-    favorited: String?,
+    tag: String,
+    author: String,
+    favorited: String,
+    @required
     limit: U64,
+    @required
     offset: U64
 }
 
@@ -60,8 +72,11 @@ structure NewArticleRequest with [UserInfo] {
 }
 
 structure NewArticle {
+    @required
     body: String,
+    @required
     description: String,
+    @required
     title: String,
     tagList: [String]
 }
@@ -72,6 +87,7 @@ operation CreateArticle {
 }
 
 structure GetArticleRequest {
+    @required
     slug: String
 }
 
@@ -86,9 +102,9 @@ structure UpdateArticleRequest with [UserInfo] {
 }
 
 structure UpdateArticle {
-    body: String?,
-    description: String?,
-    title: String?,
+    body: String,
+    description: String,
+    title: String,
 }
 
 operation UpdateArticle {
@@ -97,6 +113,7 @@ operation UpdateArticle {
 }
 
 structure DeleteArticleRequest with [UserInfo] {
+    @required
     slug: String
 }
 

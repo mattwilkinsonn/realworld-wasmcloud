@@ -8,13 +8,6 @@ use org.wasmcloud.examples.realworld#Profile
 use org.wasmcloud.examples.realworld#UserInfo
 use org.wasmcloud.examples.realworld#Article
 
-use org.wasmcloud.examples.petclinic#Date
-
-@mixin
-structure UserInfo {
-    userId: U64,
-}
-
 @wasmbus( actorReceive: true )
 service Favorites {
   version: "0.1",
@@ -22,6 +15,7 @@ service Favorites {
 }
 
 structure CreateFavoriteRequest with [UserInfo] {
+    @required
     slug: String,
 }
 
@@ -31,6 +25,7 @@ operation CreateFavorite {
 }
 
 structure DeleteFavoriteRequest with [UserInfo] {
+    @required
     slug: String,
 }
 

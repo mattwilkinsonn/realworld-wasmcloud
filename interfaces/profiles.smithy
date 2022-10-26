@@ -4,8 +4,6 @@ use org.wasmcloud.model#wasmbus
 use org.wasmcloud.model#U64
 use org.wasmcloud.model#u64
 
-use org.wasmcloud.examples.petclinic#Date
-
 @wasmbus( actorReceive: true )
 service Profiles {
   version: "0.1",
@@ -14,16 +12,22 @@ service Profiles {
 
 @mixin
 structure ProfileInput {
+    @required
     currentUserId: U64,
+    @required
     username: String
 }
 
 structure GetProfileInput with [ProfileInput] {}
 
 structure Profile {
+    @required
     username: String,
+    @required
     bio: String,
+    @required
     image: String,
+    @required
     following: Boolean
 }
 

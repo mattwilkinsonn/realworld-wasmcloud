@@ -7,8 +7,6 @@ use org.wasmcloud.model#u64
 use org.wasmcloud.examples.realworld#Profile
 use org.wasmcloud.examples.realworld#UserInfo
 
-use org.wasmcloud.examples.petclinic#Date
-
 @wasmbus( actorReceive: true )
 service Comments {
   version: "0.1",
@@ -24,11 +22,16 @@ structure MultipleCommentsResponse {
 }
 
 structure Comment {
+    @required
     id: U64,
+    @required
     author: Profile,
+    @required
     body: String,
-    createdAt: Date,
-    updatedAt: Date
+    @required
+    createdAt: Timestamp,
+    @required
+    updatedAt: Timestamp
 
 }
 
@@ -38,11 +41,14 @@ operation GetComments {
 }
 
 structure NewCommentRequest with [UserInfo] {
+    @required
     slug: String,
+    @required
     comment: NewComment
 }
 
 structure NewComment {
+    @required
     body: String
 }
 
@@ -52,7 +58,9 @@ operation CreateComment {
 }
 
 structure DeleteCommentRequest with [UserInfo] {
+    @required
     slug: String,
+    @required
     id: U64
 }
 

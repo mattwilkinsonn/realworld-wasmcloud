@@ -4,8 +4,6 @@ use org.wasmcloud.model#wasmbus
 use org.wasmcloud.model#U64
 use org.wasmcloud.model#u64
 
-use org.wasmcloud.examples.petclinic#Date
-
 @wasmbus( actorReceive: true )
 service Users {
   version: "0.1",
@@ -18,13 +16,20 @@ structure GetCurrentUserInput {
 
 @mixin
 structure UserResponse {
+    @required
     id: U64,
+    @required
     username: String,
+    @required
     email: String,
+    @required
     bio: String,
+    @required
     image: String,
-    createdAt: Date,
-    updatedAt: Date
+    @required
+    createdAt: Timestamp,
+    @required
+    updatedAt: Timestamp
 }
 
 operation GetCurrentUser {
@@ -32,7 +37,7 @@ operation GetCurrentUser {
     output: UserResponse
 }
 
-structure UpdateCurrentUserRequest {
+structure UpdateCurrentUserRequest with [UserInfo] {
     email: String,
     username: String,
     password: String,
@@ -46,11 +51,14 @@ operation UpdateCurrentUser {
 }
 
 structure LoginUserRequest {
+    @required
     email: String,
+    @required
     password: String
 }
 
 structure LoginUserResponse with [UserResponse] {
+    @required
     token: String
 }
 
@@ -60,10 +68,15 @@ operation LoginUser {
 }
 
 structure NewUserRequest {
+    @required
     username: String,
+    @required
     password: String,
+    @required
     email: String,
+    @required
     bio: String,
+    @required
     image: String
 }
 
@@ -75,5 +88,6 @@ operation RegisterUser {
 
 @mixin
 structure UserInfo {
+    @required
     userId: U64,
 }

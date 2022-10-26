@@ -11,11 +11,12 @@
 [[models]]
 path = "."
 files = [
-    "customers.smithy",
-    "visits.smithy",
-    "vets.smithy",
-    "petclinic.smithy",
-    "ui.smithy"
+    "articles.smithy",
+    "comments.smithy",
+    "favorites.smithy",
+    "profiles.smithy",
+    "tags.smithy",
+    "users.smithy",
 ]
 
 [[models]]
